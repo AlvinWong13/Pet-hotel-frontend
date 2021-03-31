@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 // Allow creation of store
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -18,13 +18,27 @@ const sagaMiddleware = createSagaMiddleware();
 
 // Holds all sagas
 function* rootSaga() {
-  
+  yield takeEvery('FETCH_OWNERS', fetchOwners);
+}
+
+// Get owners
+function* fetchOwners() {
+  try {
+    console.log('in fetchOwners');
+    const response = yield axios.get('/owners');
+    yield put({
+      type: 'SET_OWNERS',
+      payload: response.data
+    });
+  } 
+  catch (error) {
+    console.log('Error fetching owners', error);
+  }
 }
 
 // Reducer store
 const store = createStore(
   combineReducers({
-    petReducer,
   }),
   // Add sagaMiddleware
   applyMiddleware(sagaMiddleware, logger),

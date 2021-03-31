@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 import Dashboard from '../Dashboard/Dashboard'
 import ManageOwners from '../ManageOwners/ManageOwners'
