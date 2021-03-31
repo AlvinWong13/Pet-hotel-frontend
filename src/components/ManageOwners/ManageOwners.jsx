@@ -6,16 +6,41 @@ function ManageOwners() {
   
   const owners = useSelector(state => state.ownerReducer)
 
+  const [newOwner, setNewOwner] = useState('');
+
   useEffect(() => {
     dispatch({
       type: 'FETCH_OWNERS'
     })
   }, []);
 console.log(owners);
+
+const addOwner = e => {
+  e.preventDefault();
+  
+  dispatch({
+    type: 'ADD_OWNER',
+    payload: { name: newOwner }
+  })
+  
+  setNewOwner('');
+}
   
   return (
   <div>
     <h2>Manage Owners</h2>
+    <h3>Add Owner</h3>
+    <form onSubmit={addOwner}>
+      <input
+        type="text"
+        placeholder="Owner Name"
+        value={newOwner}
+        onChange={(event) => setNewOwner(event.target.value)}
+      />
+      <button>Add Owner</button>
+    </form>
+
+    <br />
 
     <table>
       <thead>

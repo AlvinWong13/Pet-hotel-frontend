@@ -19,6 +19,7 @@ const sagaMiddleware = createSagaMiddleware();
 // Holds all sagas
 function* rootSaga() {
   yield takeEvery('FETCH_OWNERS', fetchOwners);
+  yield takeEvery('ADD_OWNER', addOwner);
 }
 
 // Get owners
@@ -34,6 +35,31 @@ function* fetchOwners() {
   } 
   catch (error) {
     console.log('Error fetching owners', error);
+  }
+}
+
+function* addOwner(action) {
+  console.log('ACTION', action.payload);
+  try {
+    yield axios.post('/owners', action.payload);
+    yield put({
+      type: 'FETCH_OWNERS'
+    });
+  }
+  catch (error) {
+    console.log('Error adding new owner', error);
+  }
+}
+
+function* deleteOwner(action) {
+  try {
+    yield axios.delete(`/owners/${action.payload}`);
+    yield put({
+      type: 'FETCH_OWNERS'
+    });
+  }
+  catch (error) {
+    console.log('Error deleting owner', error);
   }
 }
 
