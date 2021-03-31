@@ -3,10 +3,40 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// Allow creation of store
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+// Allow use of redux
+import { Provider } from 'react-redux';
+// Log each action
+import logger from 'redux-logger';
+// Import saga middleware
+import createSagaMiddleware from 'redux-saga';
+import axios from 'axios';
+import { takeEvery, put } from 'redux-saga/effects';
+
+const sagaMiddleware = createSagaMiddleware();
+
+// Holds all sagas
+function* rootSaga() {
+  
+}
+
+// Reducer store
+const store = createStore(
+  combineReducers({
+    petReducer,
+  }),
+  // Add sagaMiddleware
+  applyMiddleware(sagaMiddleware, logger),
+);
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
