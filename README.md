@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Pet Hotel Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> NOTE: **Do not fork this repository.** Instead, create your own repositories from scratch.
 
-## Available Scripts
+Trello Board: https://trello.com/b/1mJRBCmZ/pet-hotel-weekend-project
 
-In the project directory, you can run:
+This Board has some tasks already defined, feel free to update as you see fit.
 
-### `npm start`
+## Objectives
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- build a full-stack application, writing the backend in a new language
+- utilize separate GitHub repositories for the client-side and server-side of an application
+- build confidence w/ SQL statements for CRUD and 1-M joins
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technology
 
-### `npm test`
+We are replacing our Node/Express/PG server with other serverside tech. Your RESTful API server needs to be able to route requests, respond, and talk to our PostGRES database.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Be sure to try to focus your Googling to API Servers with these stacks. There are tutorials for all of these where the focus is to get a basic REST API server up and running.
 
-### `npm run build`
+### Tech Guide
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+These are suggested frameworks and DB connectors for each stack:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Python / Flask (web framework)
+  - See https://github.com/PrimeAcademy/python-api-server-postgresql
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setup
 
-### `npm run eject`
+The client side should remain React, Redux, Redux Sagas as needed. The backend is not node.
+To accopmlish this, you will need to create one repo for your React application and another for the server. This will disrupt your usual workflow! You can have both running in separate vscode windows.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+You may run into proxy issues as you try to get axios to make requests to another port. Try to work through them. Recall the `proxy` setting we have been adding to our `package.json`...
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Add owners
+- Add pets
+- Remove owners if no pets are assigned
+- Remove pets
+- Check in / out a pet
+- Show total number of pet next to each owner
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Wireframes
 
-## Learn More
+#### Dashboard View
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![Add Entry Page](page-one.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Manage Owners View
 
-### Code Splitting
+![Add Entry Page](page-two.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Database
 
-### Analyzing the Bundle Size
+Start with two tables **pets** & **owners**. When base features are complete, add more tables as needed for stretch goals.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Documentation
 
-### Making a Progressive Web App
+Before moving on past Base features, please take time to comment your code and otherwise document what you've learned about your new server side technology stack. The rest of your cohort will benefit from your trailblazing!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Other Features
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Update pets and owners
+- Keep track of visits (you may need another table or two for this)
+- Add images for pets
