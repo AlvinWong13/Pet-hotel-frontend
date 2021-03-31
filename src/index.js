@@ -26,6 +26,7 @@ function* fetchOwners() {
   try {
     console.log('in fetchOwners');
     const response = yield axios.get('/owners');
+
     yield put({
       type: 'SET_OWNERS',
       payload: response.data
@@ -36,9 +37,18 @@ function* fetchOwners() {
   }
 }
 
+const ownerReducer = (state = [], action) => {
+  if (action.type === 'SET_OWNERS') {
+    return action.payload;
+  } else {
+    return state
+  }
+}
+
 // Reducer store
 const store = createStore(
   combineReducers({
+    ownerReducer,
   }),
   // Add sagaMiddleware
   applyMiddleware(sagaMiddleware, logger),
