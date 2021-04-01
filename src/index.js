@@ -24,6 +24,7 @@ function* rootSaga() {
   yield takeEvery('FETCH_PETS', fetchPets);
   yield takeEvery('ADD_PET', addPet);
   yield takeEvery('DELETE_PET', deletePet);
+  yield takeEvery('UPDATE_CHECK_IN', updateCheckIn);
 }
 
 /*** --- BEGIN OWNERS SAGAS --- ***/
@@ -107,6 +108,18 @@ function* deletePet(action) {
   }
   catch (error) {
     console.log('Error deleting pet', error);
+  }
+}
+
+function* updateCheckIn(action) {
+  try {
+    yield axios.put(`/pets/${action.payload}`);
+    yield put({
+      type: 'FETCH_PETS'
+    });
+  }
+  catch (error) {
+    console.log('Error updating pet check in', error);
   }
 }
 /*** --- END DASHBOARD SAGAS --- ***/

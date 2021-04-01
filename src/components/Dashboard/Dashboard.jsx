@@ -45,6 +45,13 @@ function Dashboard() {
     });
   }
 
+  const handleCheckIn = id => {
+    dispatch({
+      type: 'UPDATE_CHECK_IN',
+      payload: id
+    })
+  }
+
   
 
   return (
@@ -107,7 +114,9 @@ function Dashboard() {
                 <th>{pet.breed}</th>
                 <th>{pet.color}</th>
                 <th>{pet.checkin ? <>{pet.checkin}</> : <>No</>}</th>
-                <th><button onClick={() => handleDelete(pet.id)}>Delete</button></th>
+                <th>
+                  <button onClick={() => handleDelete(pet.id)}>Delete</button> 
+                  <button onClick={() => handleCheckIn(pet.id)}>{pet.checkin ? <>Check Out</> : <>Check In</>}</button></th>
               </tr>
             )
           })}
