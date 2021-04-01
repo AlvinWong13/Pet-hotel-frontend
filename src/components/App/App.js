@@ -1,18 +1,16 @@
 import { HashRouter as Router, Route } from 'react-router-dom';
 
-import Dashboard from '../Dashboard/Dashboard'
-import ManageOwners from '../ManageOwners/ManageOwners'
+import Dashboard from '../Dashboard/Dashboard';
+import ManageOwners from '../ManageOwners/ManageOwners';
+import Header from '../Header/Header';
 
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        Pet Hotel
-      </header>
-
       <Router>
+        <Header/>
         <Route path="/" exact>
           <Dashboard/>
         </Route>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import moment from 'moment';
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -31,6 +32,12 @@ function Dashboard() {
     dispatch({
       type: 'ADD_PET',
       payload: newPet
+    })
+    setNewPet({
+      owner: '',
+      name: '',
+      breed: '',
+      color: '',
     })
   } // end addPet
 
@@ -78,7 +85,8 @@ function Dashboard() {
           onChange={(event) => handleChange(event.target.value, 'color')}  
           required/>
 
-        <select onChange={(event) => handleChange(event.target.value, 'owner')}>
+        <select defaultValue="Select Owner" onChange={(event) => handleChange(event.target.value, 'owner')}>
+          <option disabled hidden selected>Select Owner</option>
           {owners.map((owner) => {
             return (
               <option 
@@ -92,6 +100,8 @@ function Dashboard() {
 
         <button>Submit</button>
       </form>
+
+        <br />
 
       <table>
         <thead>
@@ -113,7 +123,7 @@ function Dashboard() {
                 <th>{pet.name}</th>
                 <th>{pet.breed}</th>
                 <th>{pet.color}</th>
-                <th>{pet.checkin ? <>{pet.checkin}</> : <>No</>}</th>
+                <th>{pet.checkin ? <>{moment(pet.checkin).format('l')}</> : <>No</>}</th>
                 <th>
                   <button onClick={() => handleDelete(pet.id)}>Delete</button> 
                   <button onClick={() => handleCheckIn(pet.id)}>{pet.checkin ? <>Check Out</> : <>Check In</>}</button></th>

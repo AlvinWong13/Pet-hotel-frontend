@@ -13,16 +13,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -34,4 +24,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+table {
+  font-weight: bold;
+  width: 90%;
+  margin: auto;
+  border-collapse: collapse;
+  border: 2px solid rgb(77, 77, 77);
+}
+
+tr {
+  border-bottom: 1px solid rgb(77, 77, 77);
+}
+tr:nth-child(even) {
+  background-color: lightgrey;
+}
+tr:nth-child(odd) {
+  background-color: #54b1fd;
+}
+
+td {
+  padding: 9px;
+  border: 1px solid rgb(77, 77, 77);
+}
+
+tr:hover{
+  background-color: white;
+  transition: .4s;
 }
