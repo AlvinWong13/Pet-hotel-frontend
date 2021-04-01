@@ -21,9 +21,10 @@ function* rootSaga() {
   yield takeEvery('FETCH_OWNERS', fetchOwners);
   yield takeEvery('ADD_OWNER', addOwner);
   yield takeEvery('DELETE_OWNER', deleteOwner);
+  yield takeEvery('FETCH_PETS', fetchPets)
 }
 
-// Get owners
+/*** --- BEGIN OWNERS SAGAS --- ***/
 function* fetchOwners() {
   try {
     console.log('in fetchOwners');
@@ -37,7 +38,7 @@ function* fetchOwners() {
   catch (error) {
     console.log('Error fetching owners', error);
   }
-}
+} // end fetchOwners
 
 function* addOwner(action) {
   console.log('ACTION', action.payload);
@@ -50,7 +51,7 @@ function* addOwner(action) {
   catch (error) {
     console.log('Error adding new owner', error);
   }
-}
+} // end addOwner
 
 function* deleteOwner(action) {
   try {
@@ -62,8 +63,27 @@ function* deleteOwner(action) {
   catch (error) {
     console.log('Error deleting owner', error);
   }
-}
+} // end deleteOwner
+/*** --- END OWNERS SAGAS --- ***/
 
+/*** --- BEGIN DASHBOARD SAGAS --- ***/
+function* fetchPets(action) {
+  try {
+    let response = yield axios.get('/pets')
+
+    yield put({
+      type: 'SET_PETS',
+      payload: response.data
+    });
+  }
+  catch (error) {
+    console.log('Error fetching pets', error);
+  }
+}
+/*** --- END DASHBOARD SAGAS --- ***/
+
+
+// Owner reducer
 const ownerReducer = (state = [], action) => {
   if (action.type === 'SET_OWNERS') {
     return action.payload;
@@ -72,10 +92,20 @@ const ownerReducer = (state = [], action) => {
   }
 }
 
+// Pet reducer
+const petReducer = (state = [], action) => {
+  if (action.type === 'SET_PETS') {
+    return action.payload;
+  } else {
+    return state;
+  }
+}
+
 // Reducer store
 const store = createStore(
   combineReducers({
     ownerReducer,
+    petReducer,
   }),
   // Add sagaMiddleware
   applyMiddleware(sagaMiddleware, logger),
