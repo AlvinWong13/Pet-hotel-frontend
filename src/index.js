@@ -21,7 +21,8 @@ function* rootSaga() {
   yield takeEvery('FETCH_OWNERS', fetchOwners);
   yield takeEvery('ADD_OWNER', addOwner);
   yield takeEvery('DELETE_OWNER', deleteOwner);
-  yield takeEvery('FETCH_PETS', fetchPets)
+  yield takeEvery('FETCH_PETS', fetchPets);
+  yield takeEvery('ADD_PET', addPet);
 }
 
 /*** --- BEGIN OWNERS SAGAS --- ***/
@@ -78,6 +79,32 @@ function* fetchPets(action) {
   }
   catch (error) {
     console.log('Error fetching pets', error);
+  }
+}
+
+function* addPet(action) {
+  try {
+    const newPet = action.payload;
+    yield axios.post('/pets', newPet);
+    yield put({
+      type: 'FETCH_PETS'
+    });
+  } 
+  catch (error) {
+    console.log('Error adding new pet', error);
+  }
+}
+
+function* deletePet(action) {
+  try {
+    const petId = action.payload.id;
+    yield axios.delete(`/pets/${petId}`);
+    yield put({
+      type: 'FETCH_PETS'
+    });
+  }
+  catch (error) {
+    console.log('Error deleting pet', error);
   }
 }
 /*** --- END DASHBOARD SAGAS --- ***/

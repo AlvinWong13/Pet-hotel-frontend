@@ -5,20 +5,80 @@ function Dashboard() {
   const dispatch = useDispatch();
   
   const pets = useSelector(state => state.petReducer)
+  const owners = useSelector(state => state.ownerReducer)
 
-  const [newPetName, setNewPetName] = useState('');
+  const [newPet, setNewPet] = useState({
+    owner: '',
+    name: '',
+    breed: '',
+    color: '',
+  });
 
   useEffect(() => {
     dispatch({
       type: 'FETCH_PETS'
     })
+
+    dispatch({
+      type: 'FETCH_OWNERS'
+    })
   }, []);
 
-  console.log(pets)
+  const addPet = (evt) => {
+    evt.preventDefault();
+    console.log(newPet)
+
+    dispatch({
+      type: 'ADD_PET',
+      payload: newPet
+    })
+  } // end addPet
+
+  const handleChange = (value, key) => {
+    setNewPet({...newPet, [key]: value})
+  } // end handleChange
+    
+
+  
 
   return (
     <div>
       <h2>Pod 1 Rules</h2>
+
+      <form onSubmit={addPet}>
+        <input 
+          type="text" 
+          placeholder="Pet's Name" 
+          value={newPet.name} 
+          onChange={(event) => handleChange(event.target.value, 'name')} 
+          required/>
+        <input 
+          type="text" 
+          placeholder="Pet's Breed" 
+          value={newPet.breed} 
+          onChange={(event) => handleChange(event.target.value, 'breed')} 
+          required/>
+        <input 
+          type="text" 
+          placeholder="Pet's Color"
+          value={newPet.color} 
+          onChange={(event) => handleChange(event.target.value, 'color')}  
+          required/>
+
+        <select onChange={(event) => handleChange(event.target.value, 'owner')}>
+          {owners.map((owner) => {
+            return (
+              <option 
+                key={owner.id} 
+                value={owner.id}
+                >
+                {owner.name}
+              </option>)
+          })}
+        </select>
+
+        <button>Submit</button>
+      </form>
 
       <table>
         <thead>
@@ -35,7 +95,7 @@ function Dashboard() {
         <tbody>
           {pets.map((pet) => {
             return(
-              <tr>
+              <tr key={pet.id}>
                 <td>{pet.owner}</td>
                 <th>{pet.name}</th>
                 <th>{pet.breed}</th>
