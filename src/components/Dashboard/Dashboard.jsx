@@ -37,7 +37,13 @@ function Dashboard() {
   const handleChange = (value, key) => {
     setNewPet({...newPet, [key]: value})
   } // end handleChange
-    
+  
+  const handleDelete = (id) => {
+    dispatch({
+      type: 'DELETE_PET',
+      payload: id
+    });
+  }
 
   
 
@@ -101,7 +107,7 @@ function Dashboard() {
                 <th>{pet.breed}</th>
                 <th>{pet.color}</th>
                 <th>{pet.checkin ? <>{pet.checkin}</> : <>No</>}</th>
-                <th><button>Delete</button></th>
+                <th><button onClick={() => handleDelete(pet.id)}>Delete</button></th>
               </tr>
             )
           })}

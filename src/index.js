@@ -23,6 +23,7 @@ function* rootSaga() {
   yield takeEvery('DELETE_OWNER', deleteOwner);
   yield takeEvery('FETCH_PETS', fetchPets);
   yield takeEvery('ADD_PET', addPet);
+  yield takeEvery('DELETE_PET', deletePet);
 }
 
 /*** --- BEGIN OWNERS SAGAS --- ***/
@@ -97,8 +98,9 @@ function* addPet(action) {
 
 function* deletePet(action) {
   try {
-    const petId = action.payload.id;
+    const petId = action.payload;
     yield axios.delete(`/pets/${petId}`);
+
     yield put({
       type: 'FETCH_PETS'
     });
