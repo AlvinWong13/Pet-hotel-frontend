@@ -20,6 +20,7 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   yield takeEvery('FETCH_OWNERS', fetchOwners);
   yield takeEvery('ADD_OWNER', addOwner);
+  yield takeEvery('DELETE_OWNER', deleteOwner);
 }
 
 // Get owners

@@ -25,6 +25,13 @@ const addOwner = e => {
   
   setNewOwner('');
 }
+
+const deleteOwner = id => {
+  dispatch({
+    type: 'DELETE_OWNER',
+    payload: id
+  })
+}
   
   return (
   <div>
@@ -57,7 +64,7 @@ const addOwner = e => {
             <tr key={owner.id}>
               <td>{owner.name}</td>
               <td>{owner.count}</td>
-              <td>Delete</td>
+              <td><button onClick={() => deleteOwner(owner.id)}>Delete</button></td>
             </tr>
           )
         })}
